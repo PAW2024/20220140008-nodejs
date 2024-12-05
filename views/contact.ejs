@@ -1,18 +1,118 @@
-<div class="container">
-    <h1>Contact Us</h1>
-    <form>
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" required>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+        }
+        .contact-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+        }
+        .form-label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            border: none;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+        }
+        .animated-icon {
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <div class="text-center mb-4">
+                    <!-- Judul dengan Animasi -->
+                    <h1 class="fw-bold animate__animated animate__fadeInDown">
+                        <i class="fas fa-envelope animated-icon"></i> Contact Us
+                    </h1>
+                    <p class="text-muted animate__animated animate__fadeInUp">We'd love to hear from you! Please fill out the form below, and we'll get back to you as soon as possible.</p>
+                </div>
+                <div class="contact-card">
+                    <form class="needs-validation" novalidate>
+                        <!-- Input Nama -->
+                        <div class="mb-3 position-relative">
+                            <label for="name" class="form-label"><i class="fas fa-user"></i> Name:</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            <div class="invalid-tooltip">Please enter your name.</div>
+                        </div>
+                        <!-- Input Email -->
+                        <div class="mb-3 position-relative">
+                            <label for="email" class="form-label"><i class="fas fa-envelope"></i> Email:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            <div class="invalid-tooltip">Please enter a valid email address.</div>
+                        </div>
+                        <!-- Input Pesan -->
+                        <div class="mb-3 position-relative">
+                            <label for="message" class="form-label"><i class="fas fa-comment"></i> Message:</label>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Write your message" required></textarea>
+                            <div class="invalid-tooltip">Please write a message.</div>
+                        </div>
+                        <!-- Pilihan -->
+                        <div class="mb-3">
+                            <label for="subject" class="form-label"><i class="fas fa-tags"></i> Subject:</label>
+                            <select class="form-select" id="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="Feedback">Feedback</option>
+                                <option value="Support">Support</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a subject.</div>
+                        </div>
+                        <!-- Tombol Kirim -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Submit <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" required>
-        </div>
-        <div class="form-group">
-            <label for="message">Message:</label>
-            <textarea class="form-control" id="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+    </div>
+
+    <script>
+        // Validasi formulir dengan tooltip
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,52 +1,71 @@
 <div class="container mt-5">
     <h1 class="text-center">Todo List</h1>
 
-    <!-- Form to Add New Todo -->
-    <form id="addTodoForm" class="my-4">
-        <div class="input-group">
-            <input type="text" id="newTask" class="form-control" placeholder="Add a new task..." required>
-            <div class="input-group-append">
-                <button type="submit" class="btn btn-primary">Add Task</button>
-            </div>
-        </div>
-    </form>
-
-    <!-- List of Todos -->
-    <ul id="todoList" class="list-group">
-        <% todos.forEach(todo=> { %>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span class="<%= todo.completed ? 'completed' : '' %>">
-                    <%= todo.task %>
-                </span>
-                <div>
-                    <button class="btn btn-sm btn-success mr-2 editBtn" data-id="<%= todo.id %>">Edit</button>
-                    <button class="btn btn-sm btn-danger deleteBtn" data-id="<%= todo.id %>">Delete</button>
-                </div>
-            </li>
-            <% }); %>
-    </ul>
-
-    <!-- Edit Todo Modal -->
-    <div id="editModal" class="modal fade" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Todo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editTodoForm">
-                        <div class="form-group">
-                            <label for="editTask">Task</label>
-                            <input type="text" id="editTask" class="form-control" required>
+    <!-- Button to Add New Todo -->
+    <div class="d-flex justify-content-center my-4">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" style="background-color: #ff7f00; border-color: #ff7f00;">Add Firearms</button>
+    </div>
+    <!-- Grid for Todo Cards -->
+    <div class="row" id="todoGrid">
+        <% todos.forEach(todo => { %>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow todo-card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= todo.task %></h5>
+                        <div class="d-flex justify-content-between mt-3">
+                            <button class="btn btn-sm btn-success editBtn" data-id="<%= todo.id %>" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+                            <button class="btn btn-sm btn-danger deleteBtn" data-id="<%= todo.id %>">Delete</button>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
-                    </form>
+                    </div>
                 </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+<footer class="text-center py-3">
+    Firearms Sales Company. All Rights Reserved. 2024.
+</footer>
+<div id="addModal" class="modal fade" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add Firearms</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addTodoForm">
+                    <div class="form-group">
+                        <label for="newTask">Firearms</label>
+                        <input type="text" id="newTask" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3" style="background-color: #ff7f00; border-color: #ff7f00;">Add Firearms</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<div id="editModal" class="modal fade" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Firearms</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editTodoForm">
+                    <div class="form-group">
+                        <label for="editTask">Task</label>
+                        <input type="text" id="editTask" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3" style="background-color: #ff7f00; border-color: #ff7f00;">Update Firearms</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -70,7 +89,7 @@
                 });
             }
         });
-
+    
         // Delete a todo
         $('.deleteBtn').on('click', function () {
             const id = $(this).data('id');
@@ -82,16 +101,16 @@
                 }
             });
         });
-
+    
         // Show edit modal with the current task
         let editId;
         $('.editBtn').on('click', function () {
             editId = $(this).data('id');
-            const currentTask = $(this).closest('li').find('span').text();
-            $('#editTask').val(currentTask);
+            const currentTask = $(this).closest('.card').find('.card-title').text();
+            $('#editTask').val(currentTask); // Update the input value in the modal
             $('#editModal').modal('show');
         });
-
+    
         // Update todo on form submission
         $('#editTodoForm').on('submit', function (e) {
             e.preventDefault();
@@ -109,4 +128,5 @@
             }
         });
     });
+    
 </script>

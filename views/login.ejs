@@ -1,13 +1,45 @@
-<h1>Login</h1>
-<form action="/login" method="POST">
-    <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" required>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="form-card border shadow p-4 rounded" style="max-width: 400px; width: 100%; background-color: #fff;">
+        <div class="text-center mb-4">
+            <img src="images/logo.png" alt="Logo Perusahaan" class="logo mb-4" style="width: 100px;">
+            <h2 class="fw-bold">Selamat Datang</h2>
+            <p class="text-muted">Silakan masukkan username dan password Anda</p>
+        </div>
+        <form action="/login" method="POST">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Masukkan username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" required>
+                    <button type="button" class="btn btn-outline-secondary" id="toggle-password" tabindex="-1">
+                        👁️
+                    </button>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <input type="checkbox" id="remember-me" name="remember" class="form-check-input">
+                    <label for="remember-me" class="form-check-label">Ingat Saya</label>
+                </div>
+                <a href="/forgot-password" class="text-decoration-none">Lupa Password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" style="background-color: #ff7f00; border-color: #ff7f00;">Login</button>
+        </form>
+        <p class="mt-4 text-center">Belum punya akun? <a href="/signup" class="text-decoration-none" style="color: #ff7f00;">Sign Up</a></p>
     </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
-<p>Belum punya akun? <a href="/signup">Daftar di sini</a>.</p>
+</div>
+
+<script>
+    // Script untuk toggle password visibility
+    document.getElementById('toggle-password').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password');
+        const type = passwordInput.type === 'password' ? 'text' : 'password';
+        passwordInput.type = type;
+
+        // Ubah ikon tombol
+        this.textContent = type === 'password' ? '👁️' : '🙈';
+    });
+</script>

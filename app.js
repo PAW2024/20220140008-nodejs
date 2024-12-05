@@ -17,6 +17,8 @@ app.use(express.json());
 app.use('/todos', todoRoutes);
 app.set('view engine', 'ejs');
 
+app.use(express.static('public'));
+
 app.use(express.urlencoded({ extended: true }));
 
 // Konfigurasi express-session
@@ -41,7 +43,7 @@ app.get('/contact', isAuthenticated, (req, res) => {
     });
 });
 
-app.get('/todo-views', (req, res) => {
+app.get('/todo', (req, res) => {
     db.query('SELECT * FROM todos', (err, todos) => {
         if (err) return res.status(500).send('Internal Server Error');
         res.render('todo', {
@@ -50,6 +52,7 @@ app.get('/todo-views', (req, res) => {
         });
     });
 });
+
 
 app.use((req, res) => {
     res.status(404).send('404 - Page Not Found');
